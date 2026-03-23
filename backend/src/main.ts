@@ -8,8 +8,13 @@ async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
   const corsOrigins = process.env.CORS_ORIGINS
-    ? process.env.CORS_ORIGINS.split(',')
-    : ['http://localhost:3000', 'http://localhost:3001'];
+    ? process.env.CORS_ORIGINS.split(',').map((origin) => origin.trim())
+    : [
+        'http://localhost:3000',
+        'http://localhost:3001',
+        'https://flor-de-lotus-system.vercel.app',
+        'https://flordelotus.agendaclinte.com.br',
+      ];
 
   app.enableCors({
     origin: (origin, callback) => {
@@ -17,7 +22,10 @@ async function bootstrap() {
         return callback(null, true);
       }
 
-      if (corsOrigins.includes(origin) || origin.endsWith('.vercel.app')) {
+      if (
+        corsOrigins.includes(origin) ||
+        origin.endsWith('.vercel.app')
+      ) {
         return callback(null, true);
       }
 
