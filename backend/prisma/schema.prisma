@@ -1,0 +1,108 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum AppointmentStatus {
+  PENDING
+  CONFIRMED
+  RESCHEDULED
+  COMPLETED
+  CANCELLED
+  NO_SHOW
+}
+
+model Admin {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Service {
+  id              String              @id @default(uuid())
+  name            String
+  description     String?
+  price           Decimal?            @db.Decimal(10, 2)
+  priceText       String?
+  durationMinutes Int                 @default(60)
+  active          Boolean             @default(true)
+  requiresImage   Boolean             @default(false) // ✅ NOVO CAMPO
+  appointmentItems AppointmentService[]
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+}
+
+model Customer {
+  id           String        @id @default(uuid())
+  name         String
+  phone        String
+  email        String?       @unique
+  password     String?
+  appointments Appointment[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+model Appointment {
+  id              String              @id @default(uuid())
+  customerId      String
+  appointmentDate DateTime
+  startTime       String
+  endTime         String
+  status          AppointmentStatus   @default(CONFIRMED)
+  notes           String?
+  createdByAdmin  Boolean             @default(false)
+  customer        Customer            @relation(fields: [customerId], references: [id])
+  services        AppointmentService[]
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+  imageUrl        String?
+  estimatedMin    Float?
+  estimatedMax    Float?
+  evaluationNotes String?
+  analyzedAt      DateTime?
+  finalPrice      Float?
+}
+
+model AppointmentService {
+  id            String      @id @default(uuid())
+  appointmentId String
+  serviceId     String
+  appointment   Appointment @relation(fields: [appointmentId], references: [id], onDelete: Cascade)
+  service       Service     @relation(fields: [serviceId], references: [id])
+  createdAt     DateTime    @default(now())
+
+  @@unique([appointmentId, serviceId])
+}
+
+model ScheduleBlock {
+  id        String   @id @default(uuid())
+  blockDate DateTime
+  startTime String
+  endTime   String
+  reason    String?
+  createdAt DateTime @default(now())
+}
+
+model BusinessSetting {
+  id                     String   @id @default(uuid())
+  businessName           String
+  phone                  String?
+  notificationEmail      String?
+  address                String?
+  city                   String?
+  country                String?
+  workingHoursStart      String   @default("09:00")
+  workingHoursEnd        String   @default("18:00")
+  workingDays            String   @default("1,2,3,4,5")
+  defaultDurationMinutes Int      @default(60)
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
+}

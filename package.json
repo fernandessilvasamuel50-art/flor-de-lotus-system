@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "twilio": "^5.13.0"
+  },
+  "devDependencies": {
+    "@types/twilio": "^3.19.2"
+  }
+}
