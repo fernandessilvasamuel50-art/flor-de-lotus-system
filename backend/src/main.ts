@@ -16,16 +16,17 @@ async function bootstrap() {
         'https://flordelotus.agendaclinte.com.br',
       ];
 
+  console.log('CORS_ORIGINS carregadas:', corsOrigins);
+
   app.enableCors({
     origin: (origin, callback) => {
       if (!origin) {
         return callback(null, true);
       }
 
-      if (
-        corsOrigins.includes(origin) ||
-        origin.endsWith('.vercel.app')
-      ) {
+      console.log('Origem recebida no CORS:', origin);
+
+      if (corsOrigins.includes(origin) || origin.endsWith('.vercel.app')) {
         return callback(null, true);
       }
 
