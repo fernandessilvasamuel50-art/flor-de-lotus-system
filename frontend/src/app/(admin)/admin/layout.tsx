@@ -63,7 +63,7 @@ export default function AdminLayout({
         <aside className="sticky top-0 hidden h-screen w-72 shrink-0 border-r border-[#E8DDD1] bg-white px-6 py-8 lg:block">
           <div className="mb-10">
             <p className="text-sm uppercase tracking-[0.3em] text-[#A98C72]">
-              Flor de Lótus
+              Sunshine - Beauty Studio
             </p>
             <h2 className="mt-2 text-2xl font-semibold">Admin</h2>
             <p className="mt-2 text-sm leading-6 text-[#8B735C]">
@@ -120,7 +120,7 @@ export default function AdminLayout({
         <div className="min-w-0 flex-1">
           <div className="border-b border-[#E8DDD1] bg-[#F8F5F1] px-6 py-4 lg:hidden">
             <p className="text-sm uppercase tracking-[0.3em] text-[#A98C72]">
-              Flor de Lótus Admin
+              Sunshine - Beauty Studio Admin
             </p>
 
             <div className="mt-4 flex flex-wrap gap-2">

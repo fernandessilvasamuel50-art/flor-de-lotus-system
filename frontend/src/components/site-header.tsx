@@ -39,7 +39,7 @@ export function SiteHeader() {
           <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full border border-[#DCCDBE] bg-[#F3EEE8] sm:h-12 sm:w-12">
             <Image
               src="/logo.png"
-              alt="Flor de Lótus Podologia"
+              alt="Sunshine - Beauty Studio"
               fill
               className="object-contain p"
             />
@@ -47,7 +47,7 @@ export function SiteHeader() {
 
           <div className="min-w-0">
             <p className="truncate text-xs font-semibold tracking-[0.2em] text-[#A98C72] sm:text-sm">
-              FLOR DE LÓTUS
+              SUNSHINE BEAUTY STUDIO
             </p>
             <p className="truncate text-[11px] text-[#8B735C] sm:text-xs">
               Podologia & Bem-estar

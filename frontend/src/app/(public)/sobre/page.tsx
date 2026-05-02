@@ -42,7 +42,7 @@ export default function SobrePage() {
             </h1>
 
             <p className="mt-6 text-lg leading-8 text-[#8B735C]">
-              A Flor de Lótus Podologia nasceu com a proposta de oferecer um
+              O espaço Sunshine - Beauty Studio nasceu com a proposta de oferecer um
               atendimento acolhedor, elegante e comprometido com a saúde e a
               beleza dos pés.
             </p>
@@ -66,7 +66,7 @@ export default function SobrePage() {
             <div className="relative h-[500px] overflow-hidden rounded-[28px] bg-[#F3EEE8]">
               <Image
                 src="/roseli.jpg"
-                alt="Profissional da Flor de Lótus Podologia"
+                alt="Profissional da Sunshine - Beauty Studio"
                 fill
                 className="object-cover"
               />

@@ -24,10 +24,10 @@ export class MailService {
   private readonly apiKey = process.env.BREVO_API_KEY;
 
   private readonly fromEmail =
-    process.env.MAIL_FROM || 'flordelotus.agendamento@gmail.com';
+    process.env.MAIL_FROM || 'sunshinebeautystudio@gmail.com';
 
   private readonly fromName =
-    process.env.MAIL_FROM_NAME || 'Flor de Lótus Podologia';
+    process.env.MAIL_FROM_NAME || 'Sunshine - Beauty Studio';
 
   private async sendEmail(params: {
     to: { email: string; name?: string }[];
@@ -76,7 +76,7 @@ export class MailService {
           name: 'Administração',
         },
       ],
-      subject: '🌸 Nova solicitação de atendimento • Flor de Lótus',
+      subject: '🌸 Nova solicitação de atendimento • Sunshine - Beauty Studio',
       htmlContent: `
         <!DOCTYPE html>
         <html>
@@ -139,7 +139,7 @@ export class MailService {
 
               <div style="background:#FCFAF8;padding:20px 32px;border-top:1px solid #E8DDD1;text-align:center;">
                 <p style="margin:0;font-size:12px;color:#A98C72;">
-                  Flor de Lótus Podologia • Cuidado e bem-estar
+                  Sunshine - Beauty Studio • Cuidado e bem-estar
                 </p>
               </div>
             </div>
@@ -162,7 +162,7 @@ export class MailService {
           name: data.customerName,
         },
       ],
-      subject: '✨ Agendamento recebido • Flor de Lótus',
+      subject: '✨ Agendamento recebido • Sunshine - Beauty Studio',
       htmlContent: `
         <!DOCTYPE html>
         <html>
@@ -187,7 +187,7 @@ export class MailService {
                 </p>
 
                 <p style="margin:0 0 20px;font-size:15px;line-height:1.6;color:#8B735C;">
-                  Recebemos sua solicitação de agendamento com sucesso. Em breve, o espaço Flor de Lótus irá analisar seu pedido.
+                  Recebemos sua solicitação de agendamento com sucesso. Em breve, o espaço Sunshine - Beauty Studio irá analisar seu pedido.
                 </p>
 
                 <div style="background:#FBF8F4;border:1px solid #E8DDD1;border-radius:18px;padding:20px;margin-bottom:24px;">
@@ -217,7 +217,7 @@ export class MailService {
 
               <div style="background:#FCFAF8;padding:20px 32px;border-top:1px solid #E8DDD1;text-align:center;">
                 <p style="margin:0;font-size:12px;color:#A98C72;">
-                  Flor de Lótus Podologia • Cuidado e bem-estar em cada detalhe
+                  Sunshine - Beauty Studio • Cuidado e bem-estar em cada detalhe
                 </p>
               </div>
             </div>
@@ -238,7 +238,7 @@ export class MailService {
           name: data.customerName,
         },
       ],
-      subject: '✅ Agendamento confirmado • Flor de Lótus',
+      subject: '✅ Agendamento confirmado • Sunshine - Beauty Studio',
       htmlContent: `
         <h2>Agendamento confirmado</h2>
         <p>Olá, <strong>${data.customerName}</strong>!</p>
@@ -259,7 +259,7 @@ export class MailService {
           name: data.customerName,
         },
       ],
-      subject: '❌ Agendamento cancelado • Flor de Lótus',
+      subject: '❌ Agendamento cancelado • Sunshine - Beauty Studio',
       htmlContent: `
         <h2>Agendamento cancelado</h2>
         <p>Olá, <strong>${data.customerName}</strong>!</p>
@@ -280,7 +280,7 @@ export class MailService {
           name: data.customerName,
         },
       ],
-      subject: '🔄 Agendamento reagendado • Flor de Lótus',
+      subject: '🔄 Agendamento reagendado • Sunshine - Beauty Studio',
       htmlContent: `
         <h2>Agendamento reagendado</h2>
         <p>Olá, <strong>${data.customerName}</strong>!</p>
@@ -301,7 +301,7 @@ export class MailService {
           name: data.customerName,
         },
       ],
-      subject: '⚠️ Não comparecimento registrado • Flor de Lótus',
+      subject: '⚠️ Não comparecimento registrado • Sunshine - Beauty Studio',
       htmlContent: `
         <h2>Não comparecimento registrado</h2>
         <p>Olá, <strong>${data.customerName}</strong>!</p>

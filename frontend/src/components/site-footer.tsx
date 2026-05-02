@@ -6,7 +6,7 @@ export function SiteFooter() {
       <div className="mx-auto grid max-w-6xl gap-10 px-6 py-12 md:grid-cols-3">
         <div>
           <h3 className="mb-3 text-lg font-semibold text-[#7A624D]">
-            Flor de Lótus Podologia
+            Sunshine - Beauty Studio
           </h3>
           <p className="text-sm leading-7 text-[#8B735C]">
             Atendimento com cuidado, delicadeza e profissionalismo, unindo

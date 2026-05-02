@@ -1,7 +1,7 @@
 import './globals.css';
 
 export const metadata = {
-  title: 'Flor de Lótus Podologia',
+  title: 'Sunshine - Beauty Studio',
   description: 'Sistema de agendamento e gestão do espaço.',
 };
 

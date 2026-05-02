@@ -7,7 +7,7 @@ export default function HomePage() {
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <div>
             <p className="mb-4 text-sm uppercase tracking-[0.35em] text-[#A98C72]">
-              Flor de Lótus Podologia
+              Sunshine - Beauty Studio
             </p>
 
             <h2 className="text-5xl font-semibold leading-tight">

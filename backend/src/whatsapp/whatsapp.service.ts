@@ -80,7 +80,7 @@ export class WhatsappService {
     panelUrl: string;
   }) {
     const body =
-      `🌿 Flor de Lótus\n\n` +
+      `Sunshine - Beauty Studio\n\n` +
       `Olá, ${params.customerName}!\n\n` +
       `Recebemos sua solicitação de agendamento com sucesso.\n\n` +
       `Serviço(s): ${params.serviceNames.join(', ')}\n` +

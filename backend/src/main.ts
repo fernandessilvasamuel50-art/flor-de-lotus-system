@@ -5,15 +5,14 @@ import { existsSync, mkdirSync } from 'fs';
 import { NestExpressApplication } from '@nestjs/platform-express';
 
 async function bootstrap() {
-  const app = await NestFactory.create<NestExpressApplication>(AppModule);
-
   const corsOrigins = process.env.CORS_ORIGINS
     ? process.env.CORS_ORIGINS.split(',').map((origin) => origin.trim())
     : [
         'http://localhost:3000',
         'http://localhost:3001',
-        'https://flor-de-lotus-system.vercel.app',
+        'https://sunshine.agendaclinte.com.br',
         'https://flordelotus.agendaclinte.com.br',
+        'https://flor-de-lotus-system.vercel.app',
       ];
 
   console.log('CORS_ORIGINS carregadas:', corsOrigins);

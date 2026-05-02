@@ -4,7 +4,7 @@ import * as bcrypt from 'bcrypt';
 const prisma = new PrismaClient();
 
 async function main() {
-  const adminEmail = 'admin@flordelotus.pt';
+  const adminEmail = 'admin@sunshine.pt';
   const adminPassword = '123456';
 
   const existingAdmin = await prisma.admin.findUnique({
@@ -16,7 +16,7 @@ async function main() {
 
     await prisma.admin.create({
       data: {
-        name: 'Admin Flor de Lótus',
+        name: 'Admin Sunshine - Beauty Studio',
         email: adminEmail,
         password: hashedPassword,
       },
@@ -70,9 +70,9 @@ async function main() {
   if (!existingSettings) {
     await prisma.businessSetting.create({
       data: {
-        businessName: 'Flor de Lótus Podologia',
-        phone: '+351 000 000 000',
-        notificationEmail: 'admin@flordelotus.pt',
+        businessName: 'Sunshine - Beauty Studio',
+        phone: '+351 922 296 253',
+        notificationEmail: 'sunshinebeautystudio@gmail.com',
         address: 'Albufeira',
         city: 'Albufeira',
         country: 'Portugal',

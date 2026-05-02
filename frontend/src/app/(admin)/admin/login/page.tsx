@@ -33,7 +33,7 @@ export default function AdminLoginPage() {
     <div className="min-h-screen bg-[#F8F5F1] flex items-center justify-center px-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <div className="text-5xl mb-4">🌸</div>
+          <div className="text-5xl mb-4">☀️</div>
           <h1 className="text-3xl font-semibold text-[#7A624D]">Admin</h1>
           <p className="mt-2 text-sm text-[#8B735C]">
             Acesse o painel de gestão do espaço
@@ -58,7 +58,7 @@ export default function AdminLoginPage() {
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 className="w-full rounded-2xl border border-[#DCCDBE] bg-white px-4 py-3 outline-none transition focus:border-[#BFA58A]"
-                placeholder="admin@flordelotus.pt"
+                placeholder="sunshinebeautystudio@gmail.com"
               />
             </div>
 
