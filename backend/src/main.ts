@@ -5,6 +5,8 @@ import { existsSync, mkdirSync } from 'fs';
 import { NestExpressApplication } from '@nestjs/platform-express';
 
 async function bootstrap() {
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+
   const corsOrigins = process.env.CORS_ORIGINS
     ? process.env.CORS_ORIGINS.split(',').map((origin) => origin.trim())
     : [
@@ -19,9 +21,7 @@ async function bootstrap() {
 
   app.enableCors({
     origin: (origin, callback) => {
-      if (!origin) {
-        return callback(null, true);
-      }
+      if (!origin) return callback(null, true);
 
       console.log('Origem recebida no CORS:', origin);
 
