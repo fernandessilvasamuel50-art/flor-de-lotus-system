@@ -37,9 +37,9 @@ export function SiteFooter() {
           </h3>
           <div className="space-y-2 text-sm text-[#8B735C]">
             <p>
-                Rua Alexandre Herculano lote 11 loja C<br />
-                Santa Eulália, Albufeira<br />
-                Código postal 8200-271
+              Rua Alexandre Herculano lote 11 loja C<br />
+              Santa Eulalia, Albufeira<br />
+              Código postal 8200-271
             </p>
             <p>Telefone / WhatsApp: +351 922 296 253 </p>
             <p>Email: roselipereiradasilva2411@gmail.com</p>
