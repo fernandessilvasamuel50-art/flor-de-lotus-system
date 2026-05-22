@@ -173,8 +173,12 @@ export default function SobrePage() {
             <div className="rounded-3xl bg-[#FBF8F4] p-6">
               <h3 className="mb-3 text-lg font-semibold">Localização</h3>
               <p className="text-sm leading-7 text-[#8B735C]">
-                AV. Sá Carneiro Oura - Loja B edificio Isemar
-              </p>
+                  Rua Alexandre Herculano lote 11 loja C
+                  <br />
+                  Santa Eulalia, Albufeira
+                  <br />
+                  Código postal 8200-271
+                </p>
             </div>
 
             <div className="rounded-3xl bg-[#FBF8F4] p-6">
