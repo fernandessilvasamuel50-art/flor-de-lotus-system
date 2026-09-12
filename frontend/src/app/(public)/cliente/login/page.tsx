@@ -4,6 +4,18 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { loginCustomer } from '@/services/customer-auth';
 
+function getRedirectPath(fallback: string) {
+  if (typeof window === 'undefined') return fallback;
+
+  const redirect = new URLSearchParams(window.location.search).get('redirect');
+
+  if (!redirect || !redirect.startsWith('/') || redirect.startsWith('//')) {
+    return fallback;
+  }
+
+  return redirect;
+}
+
 export default function LoginClientePage() {
   const router = useRouter();
 
@@ -32,7 +44,7 @@ export default function LoginClientePage() {
       localStorage.setItem('customer_token', data.accessToken);
       localStorage.setItem('customer_data', JSON.stringify(data.customer));
 
-      router.push('/cliente/painel');
+      router.push(getRedirectPath('/cliente/painel'));
     } catch (error) {
       const message =
         error instanceof Error ? error.message : 'Erro ao entrar.';

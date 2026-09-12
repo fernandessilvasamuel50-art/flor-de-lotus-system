@@ -9,6 +9,7 @@ import { CustomerAuthModule } from './customer-auth/customer-auth.module';
 import { UploadModule } from './upload/upload.module';
 import { MailModule } from './mail/mail.module';
 import { AdminAuthModule } from './admin-auth/admin-auth.module'; // ✅ NOVO
+import { MessagesModule } from './messages/messages.module';
 
 @Module({
   imports: [
@@ -41,6 +42,7 @@ import { AdminAuthModule } from './admin-auth/admin-auth.module'; // ✅ NOVO
     UploadModule,
     MailModule,
     AdminAuthModule, // ✅ NOVO
+    MessagesModule,
   ],
   controllers: [],
   providers: [],

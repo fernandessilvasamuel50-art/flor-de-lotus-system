@@ -173,17 +173,25 @@ export default function SobrePage() {
             <div className="rounded-3xl bg-[#FBF8F4] p-6">
               <h3 className="mb-3 text-lg font-semibold">Localização</h3>
               <p className="text-sm leading-7 text-[#8B735C]">
-                  Rua Alexandre Herculano lote 11 loja C
+                  Rua Mouzinho de Albuquerque loja D
                   <br />
-                  Santa Eulalia, Albufeira
+                  Monte Choro, Albufeira
                   <br />
-                  Código postal 8200-271
+                  Código postal 8200-356
                 </p>
             </div>
 
             <div className="rounded-3xl bg-[#FBF8F4] p-6">
               <h3 className="mb-3 text-lg font-semibold">Contato</h3>
               <p className="text-sm leading-7 text-[#8B735C]">
+                Atendimento online:{' '}
+                <Link
+                  href="/cliente/painel/mensagens"
+                  className="font-medium text-[#A98C72] hover:underline"
+                >
+                  Fale conosco
+                </Link>
+                <br />
                 WhatsApp: +351 922 296 253
                 <br />
                 Email: roselipereiradasilva2411@gmail.com

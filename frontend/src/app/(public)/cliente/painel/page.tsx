@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { getCustomerDashboard, updateCustomerProfile } from '@/services/customer-auth';
+import { getCustomerConversation } from '@/services/messages';
 
 type Customer = {
   id: string;
@@ -98,6 +99,7 @@ export default function ClientePainelPage() {
   const [saving, setSaving] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
   const [profileError, setProfileError] = useState('');
+  const [unreadMessages, setUnreadMessages] = useState(0);
 
   useEffect(() => {
     async function loadDashboard() {
@@ -115,6 +117,10 @@ export default function ClientePainelPage() {
         setName(dashboardData.customer.name || '');
         setEmail(dashboardData.customer.email || '');
         setPhone(dashboardData.customer.phone || '');
+
+        getCustomerConversation()
+          .then((conversation) => setUnreadMessages(conversation.unreadCount))
+          .catch(() => setUnreadMessages(0));
       } catch (error) {
         const message =
           error instanceof Error ? error.message : 'Erro ao carregar painel.';
@@ -201,6 +207,18 @@ export default function ClientePainelPage() {
               Novo agendamento
             </Link>
 
+            <Link
+              href="/cliente/painel/mensagens"
+              className="inline-flex items-center gap-2 rounded-full border border-[#BFA58A] px-5 py-2.5 text-sm font-medium text-[#7A624D] transition hover:bg-[#F1E7DD]"
+            >
+              Mensagens
+              {unreadMessages > 0 ? (
+                <span className="rounded-full bg-[#B8897F] px-2 py-0.5 text-xs font-semibold text-white">
+                  {unreadMessages > 9 ? '9+' : unreadMessages}
+                </span>
+              ) : null}
+            </Link>
+
             <button
               onClick={handleLogout}
               className="rounded-full bg-[#F8F5F1] px-5 py-2.5 text-sm font-medium text-[#7A624D] ring-1 ring-[#DCCDBE] transition hover:bg-[#F1E7DD]"
@@ -223,6 +241,35 @@ export default function ClientePainelPage() {
         ) : data ? (
           <div className="grid gap-6 xl:grid-cols-[1.4fr_2fr]">
             <section className="space-y-6">
+              <div className="rounded-[28px] border border-[#E8DDD1] bg-white p-6 shadow-sm">
+                <div className="mb-4 flex items-start justify-between gap-4">
+                  <div>
+                    <p className="mb-2 text-sm uppercase tracking-[0.25em] text-[#A98C72]">
+                      Mensagens
+                    </p>
+                    <h2 className="text-2xl font-semibold">
+                      Atendimento online
+                    </h2>
+                  </div>
+                  {unreadMessages > 0 ? (
+                    <span className="rounded-full bg-[#B8897F] px-3 py-1 text-xs font-semibold text-white">
+                      {unreadMessages} não lida
+                      {unreadMessages > 1 ? 's' : ''}
+                    </span>
+                  ) : null}
+                </div>
+                <p className="text-sm leading-7 text-[#8B735C]">
+                  Fale com a Sublime Pés pelo sistema e acompanhe todo o
+                  histórico em um só lugar.
+                </p>
+                <Link
+                  href="/cliente/painel/mensagens"
+                  className="mt-5 inline-flex rounded-full bg-[#BFA58A] px-5 py-2.5 text-sm font-medium text-white transition hover:opacity-90"
+                >
+                  Abrir mensagens
+                </Link>
+              </div>
+
               <div className="rounded-[28px] border border-[#E8DDD1] bg-white p-6 shadow-sm">
                 <p className="mb-2 text-sm uppercase tracking-[0.25em] text-[#A98C72]">
                   Meus dados

@@ -5,6 +5,7 @@
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { listAdminConversations } from '@/services/messages';
 
 export default function AdminLayout({
   children,
@@ -17,6 +18,7 @@ export default function AdminLayout({
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [unreadMessages, setUnreadMessages] = useState(0);
 
   useEffect(() => {
     const token = localStorage.getItem('admin_token');
@@ -36,6 +38,26 @@ export default function AdminLayout({
 
     setIsLoading(false);
   }, [router, isLoginPage]);
+
+  useEffect(() => {
+    if (!isAuthenticated || isLoginPage) return;
+
+    function loadUnreadMessages() {
+      listAdminConversations()
+        .then((data) => setUnreadMessages(data.unreadCount))
+        .catch(() => setUnreadMessages(0));
+    }
+
+    loadUnreadMessages();
+
+    const interval = window.setInterval(() => {
+      if (document.visibilityState === 'visible') {
+        loadUnreadMessages();
+      }
+    }, 10000);
+
+    return () => window.clearInterval(interval);
+  }, [isAuthenticated, isLoginPage]);
 
   const handleLogout = () => {
     localStorage.removeItem('admin_token');
@@ -102,6 +124,20 @@ export default function AdminLayout({
             </Link>
 
             <Link
+              href="/admin/mensagens"
+              className={`flex items-center justify-between rounded-2xl px-4 py-3 text-sm font-medium transition hover:bg-[#F8F5F1] ${
+                pathname === '/admin/mensagens' ? 'bg-[#F8F5F1]' : ''
+              }`}
+            >
+              <span>Mensagens</span>
+              {unreadMessages > 0 ? (
+                <span className="rounded-full bg-[#B8897F] px-2 py-0.5 text-xs font-semibold text-white">
+                  {unreadMessages > 9 ? '9+' : unreadMessages}
+                </span>
+              ) : null}
+            </Link>
+
+            <Link
               href="/admin/meu-negocio"
               className={`rounded-2xl px-4 py-3 text-sm font-medium transition hover:bg-[#F8F5F1] ${
                 pathname === '/admin/meu-negocio' ? 'bg-[#F8F5F1]' : ''
@@ -142,7 +178,18 @@ export default function AdminLayout({
                 href="/admin/solicitacoes"
                 className="rounded-full bg-white px-4 py-2 text-sm ring-1 ring-[#E8DDD1]"
               >
-                Solicitações
+              Solicitações
+              </Link>
+              <Link
+                href="/admin/mensagens"
+                className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm ring-1 ring-[#E8DDD1]"
+              >
+                Mensagens
+                {unreadMessages > 0 ? (
+                  <span className="rounded-full bg-[#B8897F] px-2 py-0.5 text-xs font-semibold text-white">
+                    {unreadMessages > 9 ? '9+' : unreadMessages}
+                  </span>
+                ) : null}
               </Link>
               <Link
                 href="/admin/meu-negocio"

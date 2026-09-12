@@ -36,6 +36,16 @@ export function SiteFooter() {
             Contato
           </h3>
           <div className="space-y-2 text-sm text-[#8B735C]">
+            <p className="leading-6">
+              Precisa falar conosco?
+              <br />
+              <Link
+                href="/cliente/painel/mensagens"
+                className="font-medium text-[#A98C72] hover:underline"
+              >
+                Envie uma mensagem pelo atendimento online.
+              </Link>
+            </p>
             <p>
               Rua Alexandre Herculano lote 11 loja C<br />
               Santa Eulalia, Albufeira<br />

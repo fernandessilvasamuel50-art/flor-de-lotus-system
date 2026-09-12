@@ -18,6 +18,19 @@ type CustomerAppointmentEmailPayload = {
   startTime: string;
 };
 
+type AdminMessageNotificationPayload = {
+  customerName: string;
+  customerEmail: string;
+  customerPhone: string;
+  messagePreview: string;
+};
+
+type CustomerMessageNotificationPayload = {
+  customerName: string;
+  customerEmail: string;
+  messagePreview: string;
+};
+
 type EmailTemplateParams = {
   eyebrow?: string;
   title: string;
@@ -86,6 +99,23 @@ export class MailService {
 
   private detailRow(label: string, value: string): string {
     return `<p style="margin:0 0 12px;color:#6F5358;font-size:15px;"><strong>${label}:</strong> ${value}</p>`;
+  }
+
+  private escapeHtml(value: string): string {
+    return value
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
+  private getMessagePreview(value: string): string {
+    const normalized = value.trim().replace(/\s+/g, ' ');
+    const preview =
+      normalized.length > 180 ? `${normalized.slice(0, 177)}...` : normalized;
+
+    return this.escapeHtml(preview);
   }
 
   private renderTemplate(params: EmailTemplateParams): string {
@@ -328,6 +358,77 @@ export class MailService {
         `,
         footer:
           'Para organizar um novo horário, faça uma nova solicitação pelo painel do cliente.',
+      }),
+    });
+  }
+
+  async sendNewMessageToAdmin(
+    data: AdminMessageNotificationPayload,
+  ): Promise<void> {
+    const adminMessagesUrl = this.buildUrl('/admin/mensagens');
+
+    await this.sendEmail({
+      to: [
+        {
+          email: process.env.ADMIN_NOTIFICATION_EMAIL || '',
+          name: 'Administração',
+        },
+      ],
+      subject: `💌 Nova mensagem • ${this.brandName}`,
+      htmlContent: this.renderTemplate({
+        eyebrow: 'Atendimento online',
+        title: 'Nova mensagem recebida',
+        intro: `${this.escapeHtml(
+          data.customerName,
+        )} enviou uma nova mensagem pelo atendimento online da Sublime Pés.`,
+        details: `
+          ${this.detailRow('Cliente', this.escapeHtml(data.customerName))}
+          ${this.detailRow('E-mail', this.escapeHtml(data.customerEmail))}
+          ${this.detailRow('Telefone', this.escapeHtml(data.customerPhone))}
+          <p style="margin:18px 0 8px;color:#6F5358;font-size:15px;"><strong>Preview da mensagem:</strong></p>
+          <p style="margin:0;color:#7B6261;font-size:14px;line-height:1.6;">${this.getMessagePreview(
+            data.messagePreview,
+          )}</p>
+        `,
+        cta: {
+          label: 'Ver e responder',
+          url: adminMessagesUrl,
+        },
+      }),
+    });
+  }
+
+  async sendMessageReplyToCustomer(
+    data: CustomerMessageNotificationPayload,
+  ): Promise<void> {
+    const customerMessagesUrl = this.buildUrl('/cliente/painel/mensagens');
+
+    await this.sendEmail({
+      to: [
+        {
+          email: data.customerEmail,
+          name: data.customerName,
+        },
+      ],
+      subject: `💌 Você recebeu uma resposta • ${this.brandName}`,
+      htmlContent: this.renderTemplate({
+        eyebrow: 'Atendimento online',
+        title: 'Você recebeu uma resposta',
+        intro: `Olá, <strong>${this.escapeHtml(
+          data.customerName,
+        )}</strong>! A Sublime Pés respondeu sua mensagem no atendimento online.`,
+        details: `
+          <p style="margin:0 0 8px;color:#6F5358;font-size:15px;"><strong>Preview da resposta:</strong></p>
+          <p style="margin:0;color:#7B6261;font-size:14px;line-height:1.6;">${this.getMessagePreview(
+            data.messagePreview,
+          )}</p>
+        `,
+        cta: {
+          label: 'Ver mensagem',
+          url: customerMessagesUrl,
+        },
+        footer:
+          'Para preservar seu histórico, responda pelo painel do cliente.',
       }),
     });
   }

@@ -16,6 +16,11 @@ enum AppointmentStatus {
   NO_SHOW
 }
 
+enum MessageSender {
+  CUSTOMER
+  ADMIN
+}
+
 model Admin {
   id        String   @id @default(uuid())
   name      String
@@ -46,6 +51,7 @@ model Customer {
   email        String?       @unique
   password     String?
   appointments Appointment[]
+  conversation Conversation?
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
 }
@@ -105,4 +111,28 @@ model BusinessSetting {
   defaultDurationMinutes Int      @default(60)
   createdAt              DateTime @default(now())
   updatedAt              DateTime @updatedAt
+}
+
+model Conversation {
+  id         String    @id @default(uuid())
+  customerId String    @unique
+  customer   Customer  @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  messages   Message[]
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  @@index([updatedAt])
+}
+
+model Message {
+  id             String         @id @default(uuid())
+  conversationId String
+  conversation   Conversation   @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  senderType     MessageSender
+  content        String
+  readAt         DateTime?
+  createdAt      DateTime       @default(now())
+
+  @@index([conversationId, createdAt])
+  @@index([conversationId, senderType, readAt])
 }
