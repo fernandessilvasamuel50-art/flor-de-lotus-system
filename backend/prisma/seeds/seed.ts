@@ -4,7 +4,7 @@ import * as bcrypt from 'bcrypt';
 const prisma = new PrismaClient();
 
 async function main() {
-  const adminEmail = 'admin@sunshine.pt';
+  const adminEmail = 'admin@sublimepes.pt';
   const adminPassword = '123456';
 
   const existingAdmin = await prisma.admin.findUnique({
@@ -16,7 +16,7 @@ async function main() {
 
     await prisma.admin.create({
       data: {
-        name: 'Admin Sunshine - Beauty Studio',
+        name: 'Admin Sublime Pés',
         email: adminEmail,
         password: hashedPassword,
       },
@@ -70,9 +70,9 @@ async function main() {
   if (!existingSettings) {
     await prisma.businessSetting.create({
       data: {
-        businessName: 'Sunshine - Beauty Studio',
+        businessName: 'Sublime Pés',
         phone: '+351 922 296 253',
-        notificationEmail: 'sunshinebeautystudio@gmail.com',
+        notificationEmail: 'roselipereiradasilva2411@gmail.com',
         address: 'Albufeira',
         city: 'Albufeira',
         country: 'Portugal',

@@ -1,5 +1,15 @@
 import { API_URL } from './api';
 
+type AdminServicePayload = {
+  name: string;
+  description?: string;
+  price?: number | null;
+  priceText?: string | null;
+  durationMinutes: number;
+  active: boolean;
+  requiresImage?: boolean;
+};
+
 function getAdminToken() {
   if (typeof window === 'undefined') return null;
 
@@ -35,7 +45,7 @@ export async function getAdminServices() {
   return result;
 }
 
-export async function createAdminService(payload: any) {
+export async function createAdminService(payload: AdminServicePayload) {
   const response = await fetch(`${API_URL}/services`, {
     method: 'POST',
     headers: buildHeaders(true),
@@ -51,7 +61,10 @@ export async function createAdminService(payload: any) {
   return result;
 }
 
-export async function updateAdminService(id: string, payload: any) {
+export async function updateAdminService(
+  id: string,
+  payload: AdminServicePayload,
+) {
   const response = await fetch(`${API_URL}/services/${id}`, {
     method: 'PATCH',
     headers: buildHeaders(true),

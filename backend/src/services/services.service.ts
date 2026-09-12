@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateServiceDto } from './dto/create-service.dto';
 import { UpdateServiceDto } from './dto/update-service.dto';
@@ -68,11 +68,13 @@ export class ServicesService {
       throw new NotFoundException('Serviço não encontrado.');
     }
 
-    const relatedAppointmentsCount = await this.prisma.appointmentService.count({
-      where: {
-        serviceId: id,
+    const relatedAppointmentsCount = await this.prisma.appointmentService.count(
+      {
+        where: {
+          serviceId: id,
+        },
       },
-    });
+    );
 
     if (relatedAppointmentsCount > 0) {
       return this.prisma.service.update({

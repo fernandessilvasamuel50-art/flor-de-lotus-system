@@ -712,7 +712,7 @@ export default function AgendamentoPage() {
                 Tudo certo com o seu pedido!
               </h3>
               <p className="mb-6 text-sm leading-6 text-[#8B735C]">
-                Sua solicitação foi enviada com sucesso. Em breve, o espaço Sunshine - Beauty Studio irá analisar seu pedido. Você receberá atualizações por e-mail.
+                Sua solicitação foi enviada com sucesso. Em breve, a Sublime Pés irá analisar seu pedido. Você receberá atualizações por e-mail.
               </p>
               <button
                 onClick={() => setSuccessModalOpen(false)}

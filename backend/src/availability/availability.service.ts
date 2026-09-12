@@ -66,8 +66,8 @@ export class AvailabilityService {
           lte: endOfDay,
         },
         status: {
-          in: ['PENDING', 'CONFIRMED']
-        }
+          in: ['PENDING', 'CONFIRMED'],
+        },
       },
       include: {
         services: {

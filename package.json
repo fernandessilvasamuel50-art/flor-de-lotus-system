@@ -1,4 +1,6 @@
 {
+  "name": "sublime-pes-system",
+  "private": true,
   "dependencies": {
     "twilio": "^5.13.0"
   },

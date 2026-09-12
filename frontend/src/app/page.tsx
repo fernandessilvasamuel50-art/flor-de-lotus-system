@@ -7,16 +7,16 @@ export default function HomePage() {
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <div>
             <p className="mb-4 text-sm uppercase tracking-[0.35em] text-[#A98C72]">
-              Sunshine - Beauty Studio
+              Sublime Pés
             </p>
 
             <h2 className="text-5xl font-semibold leading-tight">
-              Cuidado, leveza e bem-estar em cada atendimento.
+              Cuidado profissional para a saúde e a beleza dos seus pés.
             </h2>
 
             <p className="mt-6 max-w-xl text-lg leading-8 text-[#8B735C]">
-              Um espaço acolhedor e profissional para quem busca saúde, estética
-              e conforto, com agendamento online simples e elegante.
+              Um espaço acolhedor e elegante para quem busca podologia, estética
+              dos pés e conforto, com agendamento online simples e seguro.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-4">

@@ -1,8 +1,14 @@
 import './globals.css';
 
 export const metadata = {
-  title: 'Sunshine - Beauty Studio',
-  description: 'Sistema de agendamento e gestão do espaço.',
+  title: 'Sublime Pés',
+  description:
+    'Agendamento online para cuidados profissionais em podologia, estética dos pés e bem-estar.',
+  manifest: '/site.webmanifest',
+  icons: {
+    icon: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
+  },
 };
 
 export default function RootLayout({

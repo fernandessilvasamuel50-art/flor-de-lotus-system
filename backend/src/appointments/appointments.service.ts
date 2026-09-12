@@ -1,4 +1,5 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
+import type { Customer } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateAppointmentDto } from './dto/create-appointment.dto';
 import { MailService } from '../mail/mail.service';
@@ -89,7 +90,7 @@ export class AppointmentsService {
     }
 
     // BLOCO DE RESOLUÇÃO DO CLIENTE
-    let customer;
+    let customer: Customer;
 
     if (authenticatedCustomerId) {
       const existingCustomer = await this.prisma.customer.findUnique({
@@ -221,7 +222,8 @@ export class AppointmentsService {
       },
     });
 
-    const formattedDate = appointment.appointmentDate.toLocaleDateString('pt-BR');
+    const formattedDate =
+      appointment.appointmentDate.toLocaleDateString('pt-BR');
 
     // ✅ Verificar se o cliente tem e-mail antes de enviar
     if (appointment.customer.email) {
@@ -236,7 +238,9 @@ export class AppointmentsService {
         console.error('Erro ao enviar e-mail de confirmação:', error);
       }
     } else {
-      console.log(`Cliente ${appointment.customer.name} não possui e-mail cadastrado. E-mail de confirmação não enviado.`);
+      console.log(
+        `Cliente ${appointment.customer.name} não possui e-mail cadastrado. E-mail de confirmação não enviado.`,
+      );
     }
 
     return appointment;
@@ -259,7 +263,8 @@ export class AppointmentsService {
       },
     });
 
-    const formattedDate = appointment.appointmentDate.toLocaleDateString('pt-BR');
+    const formattedDate =
+      appointment.appointmentDate.toLocaleDateString('pt-BR');
 
     // ✅ Verificar se o cliente tem e-mail antes de enviar
     if (appointment.customer.email) {
@@ -274,7 +279,9 @@ export class AppointmentsService {
         console.error('Erro ao enviar e-mail de cancelamento:', error);
       }
     } else {
-      console.log(`Cliente ${appointment.customer.name} não possui e-mail cadastrado. E-mail de cancelamento não enviado.`);
+      console.log(
+        `Cliente ${appointment.customer.name} não possui e-mail cadastrado. E-mail de cancelamento não enviado.`,
+      );
     }
 
     return appointment;
@@ -315,7 +322,8 @@ export class AppointmentsService {
       },
     });
 
-    const formattedDate = appointment.appointmentDate.toLocaleDateString('pt-BR');
+    const formattedDate =
+      appointment.appointmentDate.toLocaleDateString('pt-BR');
 
     // ✅ Verificar se o cliente tem e-mail antes de enviar
     if (appointment.customer.email) {
@@ -330,7 +338,9 @@ export class AppointmentsService {
         console.error('Erro ao enviar e-mail de não comparecimento:', error);
       }
     } else {
-      console.log(`Cliente ${appointment.customer.name} não possui e-mail cadastrado. E-mail de não comparecimento não enviado.`);
+      console.log(
+        `Cliente ${appointment.customer.name} não possui e-mail cadastrado. E-mail de não comparecimento não enviado.`,
+      );
     }
 
     return appointment;
@@ -410,7 +420,8 @@ export class AppointmentsService {
       },
     });
 
-    const formattedDate = updatedAppointment.appointmentDate.toLocaleDateString('pt-BR');
+    const formattedDate =
+      updatedAppointment.appointmentDate.toLocaleDateString('pt-BR');
 
     // ✅ Verificar se o cliente tem e-mail antes de enviar
     if (updatedAppointment.customer.email) {
@@ -425,7 +436,9 @@ export class AppointmentsService {
         console.error('Erro ao enviar e-mail de reagendamento:', error);
       }
     } else {
-      console.log(`Cliente ${updatedAppointment.customer.name} não possui e-mail cadastrado. E-mail de reagendamento não enviado.`);
+      console.log(
+        `Cliente ${updatedAppointment.customer.name} não possui e-mail cadastrado. E-mail de reagendamento não enviado.`,
+      );
     }
 
     return updatedAppointment;
@@ -585,16 +598,14 @@ export class AppointmentsService {
       }),
     ]);
 
-    const getAppointmentTotal = (
-      appointment: {
-        finalPrice?: number | null;
-        services: Array<{
-          service: {
-            price: unknown;
-          };
-        }>;
-      },
-    ) => {
+    const getAppointmentTotal = (appointment: {
+      finalPrice?: number | null;
+      services: Array<{
+        service: {
+          price: unknown;
+        };
+      }>;
+    }) => {
       if (appointment.finalPrice != null) {
         return Number(appointment.finalPrice);
       }

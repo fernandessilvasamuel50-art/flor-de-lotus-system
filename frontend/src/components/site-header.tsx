@@ -1,5 +1,7 @@
 'use client';
 
+/* eslint-disable react-hooks/set-state-in-effect */
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
@@ -39,7 +41,7 @@ export function SiteHeader() {
           <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full border border-[#DCCDBE] bg-[#F3EEE8] sm:h-12 sm:w-12">
             <Image
               src="/logo.png"
-              alt="Sunshine - Beauty Studio"
+              alt="Sublime Pés"
               fill
               className="object-contain p"
             />
@@ -47,10 +49,10 @@ export function SiteHeader() {
 
           <div className="min-w-0">
             <p className="truncate text-xs font-semibold tracking-[0.2em] text-[#A98C72] sm:text-sm">
-              SUNSHINE BEAUTY STUDIO
+              SUBLIME PÉS
             </p>
             <p className="truncate text-[11px] text-[#8B735C] sm:text-xs">
-              Podologia & Bem-estar
+              Podologia, estética dos pés & bem-estar
             </p>
           </div>
         </Link>

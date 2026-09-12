@@ -1,9 +1,18 @@
-import { Body, Controller, Get, Headers, Post, Patch, UnauthorizedException } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Headers,
+  Post,
+  Patch,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { CustomerAuthService } from './customer-auth.service';
 import { RegisterCustomerDto } from './dto/register-customer.dto';
 import { LoginCustomerDto } from './dto/login-customer.dto';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
+import type { AuthTokenPayload } from '../common/types/auth-token-payload';
 
 @Controller('customer-auth')
 export class CustomerAuthController {
@@ -30,7 +39,11 @@ export class CustomerAuthController {
 
     const token = authorization.replace('Bearer ', '');
 
-    const payload = await this.jwtService.verifyAsync(token);
+    const payload = await this.jwtService.verifyAsync<AuthTokenPayload>(token);
+
+    if (!payload.sub) {
+      throw new UnauthorizedException('Token inválido ou expirado.');
+    }
 
     return this.customerAuthService.getProfile(payload.sub);
   }
@@ -45,7 +58,11 @@ export class CustomerAuthController {
     }
 
     const token = authorization.replace('Bearer ', '');
-    const payload = await this.jwtService.verifyAsync(token);
+    const payload = await this.jwtService.verifyAsync<AuthTokenPayload>(token);
+
+    if (!payload.sub) {
+      throw new UnauthorizedException('Token inválido ou expirado.');
+    }
 
     return this.customerAuthService.updateProfile(payload.sub, data);
   }
@@ -58,7 +75,11 @@ export class CustomerAuthController {
 
     const token = authorization.replace('Bearer ', '');
 
-    const payload = await this.jwtService.verifyAsync(token);
+    const payload = await this.jwtService.verifyAsync<AuthTokenPayload>(token);
+
+    if (!payload.sub) {
+      throw new UnauthorizedException('Token inválido ou expirado.');
+    }
 
     return this.customerAuthService.getDashboard(payload.sub);
   }

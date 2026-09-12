@@ -1,10 +1,10 @@
-# Flor de Lótus System
+# Sublime Pés
 
-A full-stack appointment scheduling platform built for service professionals.
+A full-stack appointment scheduling platform for professional foot care, podology and wellness services.
 
-Flor de Lótus allows businesses to manage their services, customers, availability and appointments through an administrative dashboard, while customers can independently browse available services, select dates and times, and request appointments online.
+Sublime Pés allows the business to manage services, customers, availability and appointments through an administrative dashboard, while customers can browse available services, select dates and times, and request appointments online.
 
-The project was built with **Next.js, React, TypeScript, NestJS, Prisma and PostgreSQL** and later served as the technical foundation for the development of **Agendaclinte**.
+The project was built with **Next.js, React, TypeScript, NestJS, Prisma and PostgreSQL**.
 
 ---
 
@@ -14,11 +14,11 @@ The project was built with **Next.js, React, TypeScript, NestJS, Prisma and Post
 
 A responsive public website where customers can learn about the business and access the online scheduling flow.
 
-![Flor de Lótus Home](docs/screenshots/home.png)
+![Sublime Pés Home](docs/screenshots/home.png)
 
 ### Online Scheduling
 
-Customers can select a service, choose an available date and time, provide their information and submit an appointment request directly through the platform.
+Customers can select one or more services, choose an available date and time, provide their information and submit an appointment request directly through the platform.
 
 ![Online Scheduling](docs/screenshots/scheduling.png)
 
@@ -71,9 +71,11 @@ The system automatically communicates relevant appointment updates to customers.
 
 Customers can receive email notifications when important changes occur, such as:
 
+* Appointment request received
 * Appointment confirmation
-* Appointment status updates
-* Scheduling changes
+* Appointment rescheduling
+* Appointment cancellation
+* No-show registration
 
 The backend also includes integrations for email and messaging services.
 
@@ -116,7 +118,7 @@ The backend also includes integrations for email and messaging services.
 
 ## Architecture
 
-Flor de Lótus follows a separated frontend and backend architecture.
+Sublime Pés follows a separated frontend and backend architecture.
 
 ### Frontend
 
@@ -166,7 +168,7 @@ The application contains authenticated areas for both customers and administrato
 
 A typical appointment follows this flow:
 
-1. The customer selects a service.
+1. The customer selects one or more services.
 2. The customer chooses a date.
 3. The system displays available times.
 4. The customer selects an available time.
@@ -259,20 +261,27 @@ npm run dev
 
 ## Environment Variables
 
-The application requires environment variables for services such as:
+The application requires environment variables for database access, authentication, public URLs and notification services.
 
 ```env
 DATABASE_URL=
 JWT_SECRET=
 
+# Frontend/backend URLs
+FRONTEND_URL=
+CORS_ORIGINS=
+NEXT_PUBLIC_API_URL=
+
 # Email configuration
-SMTP_HOST=
-SMTP_USER=
-SMTP_PASS=
+BREVO_API_KEY=
+MAIL_FROM=
+MAIL_FROM_NAME=Sublime Pés
+ADMIN_NOTIFICATION_EMAIL=
 
 # Twilio
 TWILIO_ACCOUNT_SID=
 TWILIO_AUTH_TOKEN=
+TWILIO_WHATSAPP_NUMBER=
 ```
 
 Real credentials are not included in the repository.
@@ -301,32 +310,9 @@ npm run test:cov
 
 ---
 
-## From Flor de Lótus to Agendaclinte
-
-Flor de Lótus System started as a complete scheduling solution created for a specific service business.
-
-During its development, the project provided practical experience with appointment workflows, authentication, availability management, customer communication, administrative tools and full-stack application architecture.
-
-The concepts and experience gained from Flor de Lótus later became the foundation for **Agendaclinte**, a more comprehensive SaaS platform.
-
-Agendaclinte expands the original concept with features such as:
-
-* Multi-business support
-* Visual website customization
-* A dedicated website Studio
-* Public website publishing
-* Business-specific configurations
-* More advanced SaaS management capabilities
-
-The source code for Agendaclinte is currently private as it is an independently developed commercial project.
-
----
-
 ## Project Status
 
-Flor de Lótus is a completed functional project and currently serves as part of my software development portfolio.
-
-Further development of the original concept continues through **Agendaclinte**.
+Sublime Pés is a functional scheduling system for professional foot care services, with public scheduling, customer access and administrative management.
 
 ---
 

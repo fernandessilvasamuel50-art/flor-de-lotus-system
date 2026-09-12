@@ -37,7 +37,7 @@ export class UploadController {
       },
     }),
   )
-  uploadFile(@UploadedFile() file?: any) {
+  uploadFile(@UploadedFile() file?: Express.Multer.File) {
     if (!file) {
       throw new BadRequestException('Nenhum arquivo enviado.');
     }

@@ -11,6 +11,7 @@ import { JwtService } from '@nestjs/jwt';
 import { AppointmentsService } from './appointments.service';
 import { CreateAppointmentDto } from './dto/create-appointment.dto';
 import { AnalyzeAppointmentDto } from './dto/analyze-appointment.dto';
+import type { AuthTokenPayload } from '../common/types/auth-token-payload';
 
 @Controller('appointments')
 export class AppointmentsController {
@@ -49,12 +50,13 @@ export class AppointmentsController {
     if (authorization?.startsWith('Bearer ')) {
       try {
         const token = authorization.replace('Bearer ', '');
-        const payload = await this.jwtService.verifyAsync(token);
+        const payload =
+          await this.jwtService.verifyAsync<AuthTokenPayload>(token);
 
         if (payload?.role === 'customer' && payload?.sub) {
           authenticatedCustomerId = payload.sub;
         }
-      } catch (error) {
+      } catch {
         console.log(
           'Token de cliente inválido, expirado ou incompatível. Seguindo como solicitação pública.',
         );
@@ -101,10 +103,7 @@ export class AppointmentsController {
   }
 
   @Patch(':id/analyze')
-  async analyze(
-    @Param('id') id: string,
-    @Body() data: AnalyzeAppointmentDto,
-  ) {
+  async analyze(@Param('id') id: string, @Body() data: AnalyzeAppointmentDto) {
     return this.appointmentsService.analyzeAppointment(id, data);
   }
 }

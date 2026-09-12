@@ -14,9 +14,6 @@ export class AvailabilityController {
       ? serviceIds.split(',').filter(Boolean)
       : [];
 
-    return this.availabilityService.getAvailableSlots(
-      date,
-      parsedServiceIds,
-    );
+    return this.availabilityService.getAvailableSlots(date, parsedServiceIds);
   }
 }

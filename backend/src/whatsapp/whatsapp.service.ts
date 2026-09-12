@@ -6,6 +6,7 @@ export class WhatsappService {
   private readonly logger = new Logger(WhatsappService.name);
   private readonly client: ReturnType<typeof twilio> | null;
   private readonly from: string | undefined;
+  private readonly brandName = 'Sublime Pés';
 
   constructor() {
     const accountSid = process.env.TWILIO_ACCOUNT_SID;
@@ -61,7 +62,9 @@ export class WhatsappService {
       return message;
     } catch (error) {
       const message =
-        error instanceof Error ? error.message : 'Erro desconhecido no WhatsApp';
+        error instanceof Error
+          ? error.message
+          : 'Erro desconhecido no WhatsApp';
 
       this.logger.error(
         `Erro ao enviar WhatsApp para ${formattedTo}: ${message}`,
@@ -80,13 +83,13 @@ export class WhatsappService {
     panelUrl: string;
   }) {
     const body =
-      `Sunshine - Beauty Studio\n\n` +
+      `${this.brandName}\n\n` +
       `Olá, ${params.customerName}!\n\n` +
       `Recebemos sua solicitação de agendamento com sucesso.\n\n` +
       `Serviço(s): ${params.serviceNames.join(', ')}\n` +
       `Data: ${params.date}\n` +
       `Horário: ${params.startTime}\n\n` +
-      `Sua solicitação está aguardando confirmação da podóloga.\n\n` +
+      `Sua solicitação está aguardando confirmação da profissional responsável.\n\n` +
       `Acompanhe pelo painel:\n${params.panelUrl}`;
 
     return this.send(params.customerPhone, body);
@@ -101,6 +104,7 @@ export class WhatsappService {
     panelUrl: string;
   }) {
     const body =
+      `${this.brandName}\n\n` +
       `✅ Agendamento confirmado!\n\n` +
       `Olá, ${params.customerName}!\n\n` +
       `Seu atendimento foi confirmado com sucesso.\n\n` +
@@ -121,6 +125,7 @@ export class WhatsappService {
     panelUrl: string;
   }) {
     const body =
+      `${this.brandName}\n\n` +
       `Olá, ${params.customerName}.\n\n` +
       `Seu agendamento foi cancelado.\n\n` +
       `Serviço(s): ${params.serviceNames.join(', ')}\n` +
@@ -140,6 +145,7 @@ export class WhatsappService {
     panelUrl: string;
   }) {
     const body =
+      `${this.brandName}\n\n` +
       `🔄 Agendamento reagendado\n\n` +
       `Olá, ${params.customerName}!\n\n` +
       `Seu atendimento foi reagendado.\n\n` +

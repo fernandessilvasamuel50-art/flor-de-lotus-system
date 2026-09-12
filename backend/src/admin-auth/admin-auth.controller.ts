@@ -1,8 +1,17 @@
-import { Body, Controller, Get, Headers, Post, UnauthorizedException, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Headers,
+  Post,
+  UnauthorizedException,
+  UseGuards,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { AdminAuthService } from './admin-auth.service';
 import { AdminLoginDto } from './dto/admin-login.dto';
 import { AdminJwtAuthGuard } from '../common/guards/admin-jwt-auth.guard';
+import type { AuthTokenPayload } from '../common/types/auth-token-payload';
 
 @Controller('admin-auth')
 export class AdminAuthController {
@@ -24,7 +33,11 @@ export class AdminAuthController {
     }
 
     const token = authorization.replace('Bearer ', '');
-    const payload = await this.jwtService.verifyAsync(token);
+    const payload = await this.jwtService.verifyAsync<AuthTokenPayload>(token);
+
+    if (!payload.sub) {
+      throw new UnauthorizedException('Token inválido ou expirado.');
+    }
 
     return this.adminAuthService.getProfile(payload.sub);
   }

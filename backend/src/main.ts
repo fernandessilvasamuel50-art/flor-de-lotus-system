@@ -9,13 +9,7 @@ async function bootstrap() {
 
   const corsOrigins = process.env.CORS_ORIGINS
     ? process.env.CORS_ORIGINS.split(',').map((origin) => origin.trim())
-    : [
-        'http://localhost:3000',
-        'http://localhost:3001',
-        'https://sunshine.agendaclinte.com.br',
-        'https://flordelotus.agendaclinte.com.br',
-        'https://flor-de-lotus-system.vercel.app',
-      ];
+    : ['http://localhost:3000', 'http://localhost:3001'];
 
   console.log('CORS_ORIGINS carregadas:', corsOrigins);
 
@@ -55,4 +49,4 @@ async function bootstrap() {
   console.log(`🚀 Backend rodando na porta ${port}`);
 }
 
-bootstrap();
+void bootstrap();
